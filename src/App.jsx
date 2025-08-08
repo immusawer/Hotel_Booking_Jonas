@@ -8,7 +8,7 @@ import PageNotFound from "./pages/PageNotFound";
 import Account from "./pages/Account";
 import Users from "./pages/Users";
 import Settings from "./pages/Settings";
-import GlobalStyles from "./styles/GlobalStyles";
+import GlobalStyles from "./styles/globalStyles";
 import AppLayout from "./ui/AppLayout";
 
 function App() {

@@ -19,6 +19,7 @@ module.exports = {
   plugins: ["react", "react-hooks"],
   rules: {
     // your custom rules here
+    "react/react-in-jsx-scope": "off",
   },
   settings: {
     react: {

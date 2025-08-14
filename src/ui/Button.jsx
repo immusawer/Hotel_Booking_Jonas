@@ -7,6 +7,7 @@ const sizes = {
     text-transform: uppercase;
     font-weight: 600;
     text-align: center;
+    margin: 2px;
   `,
   medium: css`
     font-size: 1.4rem;

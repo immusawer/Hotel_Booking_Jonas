@@ -45,12 +45,12 @@ const Error = styled.span`
   color: var(--color-red-700);
 `;
 
-function CreateCabinForm({ cabinToEdit = {} }) {
+function CreateCabinForm({ cabinToEdit = {}, onClose }) {
   const { CreateCabin, isCreating } = useCreatecabin();
   const { Editcabin, isEditing } = useEditCabin();
   const { id: editId, ...editValues } = cabinToEdit;
   const isEditSession = Boolean(editId);
-  const { register, handleSubmit, getValues, formState, reset } = useForm({
+  const { register, handleSubmit, getValues, formState } = useForm({
     defaultValues: isEditSession ? editValues : {},
   });
   const { errors } = formState;
@@ -64,7 +64,7 @@ function CreateCabinForm({ cabinToEdit = {} }) {
         {
           onSuccess: (data) => {
             console.log(data);
-            reset();
+            onClose?.();
           },
         }
       );
@@ -74,7 +74,7 @@ function CreateCabinForm({ cabinToEdit = {} }) {
         {
           onSuccess: (data) => {
             console.log(data);
-            reset();
+            onClose?.();
           },
         }
       );
@@ -163,11 +163,8 @@ function CreateCabinForm({ cabinToEdit = {} }) {
 
       <FormRow>
         {/* type is an HTML attribute! */}
-        <Button variation="secondary" type="reset">
-          Cancel
-        </Button>
         <Button disabled={isWorking}>
-          {isEditSession ? "Edic Cabin" : "Create Cabin"}
+          {isEditSession ? "Edit Cabin" : "Create Cabin"}
         </Button>
       </FormRow>
     </Form>

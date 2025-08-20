@@ -46,6 +46,90 @@ const Discount = styled.div`
   color: var(--color-green-700);
 `;
 
+const ActionButtons = styled.div`
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+`;
+
+const ActionButton = styled.button`
+  background: none;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background-color: var(--color-grey-100);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  svg {
+    width: 1.8rem;
+    height: 1.8rem;
+    transition: all 0.3s ease;
+  }
+`;
+
+const DuplicateButton = styled(ActionButton)`
+  &:hover {
+    background-color: var(--color-blue-100);
+  }
+
+  svg {
+    color: var(--color-brand-600);
+  }
+
+  &:hover svg {
+    color: var(--color-blue-700);
+    transform: scale(1.1);
+  }
+`;
+
+const EditButton = styled(ActionButton)`
+  &:hover {
+    background-color: var(--color-green-100);
+  }
+
+  svg {
+    color: var(--color-green-700);
+  }
+
+  &:hover svg {
+    color: var(--color-green-700);
+    transform: scale(1.1);
+    filter: brightness(0.9);
+  }
+`;
+
+const DeleteButton = styled(ActionButton)`
+  &:hover {
+    background-color: var(--color-red-100);
+  }
+
+  svg {
+    color: var(--color-red-700);
+  }
+
+  &:hover svg {
+    color: var(--color-red-800);
+    transform: scale(1.1);
+  }
+`;
+
 const CabinRow = ({ cabin }) => {
   const [showForm, setShowForm] = useState(false);
   const {
@@ -82,17 +166,28 @@ const CabinRow = ({ cabin }) => {
         ) : (
           <span>-</span>
         )}
-        <div>
-          <button onClick={handleDuplicate} disabled={isCreating}>
+        <ActionButtons>
+          <DuplicateButton
+            onClick={handleDuplicate}
+            disabled={isCreating}
+            title="Duplicate cabin"
+          >
             <HiSquare2Stack />
-          </button>
-          <button onClick={() => setShowForm((show) => !show)}>
+          </DuplicateButton>
+          <EditButton
+            onClick={() => setShowForm((show) => !show)}
+            title="Edit cabin"
+          >
             <HiPencil />
-          </button>
-          <button onClick={() => deleteCabin(cabinId)} disabled={isDeleting}>
+          </EditButton>
+          <DeleteButton
+            onClick={() => deleteCabin(cabinId)}
+            disabled={isDeleting}
+            title="Delete cabin"
+          >
             <HiTrash />
-          </button>
-        </div>
+          </DeleteButton>
+        </ActionButtons>
       </TableRow>
       {showForm && (
         <Modal onClose={() => setShowForm(false)}>

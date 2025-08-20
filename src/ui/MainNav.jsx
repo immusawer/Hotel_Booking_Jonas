@@ -19,37 +19,86 @@ const StyledNavLink = styled(NavLink)`
   &:visited {
     display: flex;
     align-items: center;
-    gap: 1.2rem;
-
+    gap: 1.6rem;
     color: var(--color-grey-600);
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     font-weight: 500;
-    padding: 1.2rem 2.4rem;
-    transition: all 0.3s;
+    padding: 1.4rem 2rem;
+    margin: 0.4rem 0;
+    border-radius: 1.2rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+      );
+      transition: left 0.5s;
+    }
   }
 
-  /* This works because react-router places the active class on the active NavLink */
-  &:hover,
-  &:active,
+  &:hover {
+    color: var(--color-brand-700);
+    background: linear-gradient(
+      135deg,
+      var(--color-brand-50),
+      var(--color-brand-100)
+    );
+    transform: translateX(4px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+
+    &::before {
+      left: 100%;
+    }
+  }
+
   &.active:link,
   &.active:visited {
-    color: var(--color-grey-800);
-    background-color: var(--color-grey-50);
-    border-radius: var(--border-radius-sm);
+    color: var(--color-brand-700);
+    background: linear-gradient(
+      135deg,
+      var(--color-brand-100),
+      var(--color-brand-200)
+    );
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border-left: 4px solid var(--color-brand-600);
   }
 
   & svg {
-    width: 2.4rem;
-    height: 2.4rem;
-    color: var(--color-grey-400);
-    transition: all 0.3s;
+    width: 2.2rem;
+    height: 2.2rem;
+    color: var(--color-grey-500);
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
   }
 
-  &:hover svg,
-  &:active svg,
+  &:hover svg {
+    color: var(--color-brand-600);
+    transform: scale(1.1);
+  }
+
   &.active:link svg,
   &.active:visited svg {
     color: var(--color-brand-600);
+    transform: scale(1.05);
+  }
+
+  & span {
+    font-weight: inherit;
+    letter-spacing: 0.025em;
   }
 `;
 import React from "react";
